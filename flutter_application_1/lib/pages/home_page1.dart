@@ -27,11 +27,12 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text("Contato"),
             TextField(
               controller: controllerLogin,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: "Digite seu login",
+                labelText: "Digite seu Nome",
               ),
             ), //Cria caixa de dialogo
 
@@ -41,10 +42,27 @@ class _MyHomePageState extends State<MyHomePage> {
               obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: "Digite a sua senha",
+                labelText: "Telefone",
               ),
             ),
-
+            SizedBox(height: 20),
+            TextField(
+              controller: controllerSenha,
+              obscureText: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Data de Nascimento",
+              ),
+            ),
+            SizedBox(height: 20),
+            TextField(
+              controller: controllerSenha,
+              obscureText: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Endereço",
+              ),
+            ),
             //Iniciar aqui
             Column(
               children: [
@@ -66,3 +84,22 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+// import 'package:flutter/material.dart';
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text("Meu Cabeçalho"),
+//           centerTitle: true, // centraliza o título
+//           backgroundColor: Colors.blue, // cor de fundo do cabeçalho
+//         ),
+//         body: const Center(child: Text("Conteúdo da tela")),
+//       ),
+//     );
+//   }
+// }
