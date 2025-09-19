@@ -8,7 +8,7 @@ class AppTextStyle {
   );
   static const TextStyle subtitlePages = TextStyle(
     fontSize: 18,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
     color: Colors.blueGrey,
   );
 }
