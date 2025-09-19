@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/home_page.dart';
+
+import 'package:flutter_application_1/pages/projetos_pages.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -10,10 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
- 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(title: 'Minha Tela de Login'),
+      home: ProjetosPages(),
     );
   }
 }

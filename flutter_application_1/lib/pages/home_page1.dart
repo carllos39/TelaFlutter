@@ -66,14 +66,17 @@ class _MyHomePageState extends State<MyHomePage> {
             //Iniciar aqui
             Column(
               children: [
-                SizedBox(
-                  width: 500,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      print(controllerLogin.text);
-                      print(controllerSenha.text);
-                    },
-                    child: Text("Logar"),
+                Padding(
+                  padding: const EdgeInsets.all(30),
+                  child: SizedBox(
+                    width: 900,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print(controllerLogin.text);
+                        print(controllerSenha.text);
+                      },
+                      child: Text("Logar"),
+                    ),
                   ),
                 ),
               ],
