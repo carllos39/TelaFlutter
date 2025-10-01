@@ -13,7 +13,7 @@ class ViaCepService {
     var response = await  http.get(uri);
 
     if(response.statusCode == 200){
-  Map<String ,dynamic>json = jsonDecode(response.body);
+  Map<String, dynamic>json = jsonDecode(response.body);
 
   Endereco endereco = Endereco.fromJson(json);
 
