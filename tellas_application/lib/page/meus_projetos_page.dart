@@ -24,6 +24,12 @@ class _MeusProjetosPageState extends State<MeusProjetosPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Bem-vindo à Home Page!', style: TextStyle(fontSize: 20)),
+            Card(
+              child: Padding(padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 30),
+              child: Column(),
+              ),
+              
+            ),
             SizedBox(height: 20),
              ElevatedButton(
                onPressed: () {
