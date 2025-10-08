@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:via_cep/Models/endereco.dart';
 import 'package:via_cep/Services/via_cep_service.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required String title});
 
@@ -19,31 +18,45 @@ class _HomePageState extends State<HomePage> {
   TextEditingController controllerCidade = TextEditingController();
   TextEditingController controllerEstado = TextEditingController();
   Endereco? endereco; //Variável pode receber null "?"
+  bool isLoading = false;
 
   ViaCepService viaCepService = ViaCepService();
 
   Future<void> buscarCep(String cep) async {
-    Endereco? response = await viaCepService.buscarEndereco(cep);
-
-    if (response?.localidade == null) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            icon: Icon(Icons.warning),
-            title: Text("Atenção"),
-            content: Text("Cep não encontrado"),
-          );
-        },
-      );
-      return;
-    }
-
+    clearControllers();
     setState(() {
-      endereco = response;
+      isLoading = true;
     });
+    try {
+      Endereco? response = await viaCepService.buscarEndereco(cep);
 
-    setControllersCep(endereco!);
+      if (response?.localidade == null) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              icon: Icon(Icons.warning),
+              title: Text("Atenção"),
+              content: Text("Cep não encontrado"),
+            );
+          },
+        );
+        controllerCep.clear();
+        return;
+      }
+
+      setState(() {
+        endereco = response;
+      });
+
+      setControllersCep(endereco!);
+    } catch (erro) {
+      throw Exception("Erro ao buscar CEP: $erro");
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   void setControllersCep(Endereco endereco) {
@@ -53,7 +66,13 @@ class _HomePageState extends State<HomePage> {
     controllerCidade.text = endereco.localidade!;
     controllerEstado.text = endereco.estado!;
   }
-
+  void clearControllers() {
+    controllerBairro.clear();
+    controllerLogradouro.clear();
+    controllerCidade.clear();
+    controllerLogradouro.clear();
+    controllerEstado.clear();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,21 +88,37 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
+                onChanged: (valor) {
+                  if (valor.isEmpty) {
+                    clearControllers();
+                  }
+                },
                 controller: controllerCep,
                 maxLength: 8,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      buscarCep(controllerCep.text);
-                    },
-                    icon: Icon(Icons.search),
-                  ),
+                  suffixIcon: isLoading
+                  
+                     ? SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: CircularProgressIndicator(),
+                          ),
+                     )
+                      : IconButton(
+                          onPressed: () {
+                            buscarCep(controllerCep.text);
+                          },
+                          icon: Icon(Icons.search),
+                        ),
                   border: OutlineInputBorder(),
                   labelText: "CEP",
                 ),
               ),
+                if (controllerLogradouro.text.isNotEmpty)//Esconde o campo quando estiver vazio
               TextField(
                 controller: controllerLogradouro,
                 decoration: InputDecoration(
