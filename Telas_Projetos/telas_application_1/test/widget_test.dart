@@ -14,7 +14,7 @@ import 'package:telas_application_1/page/login_tela.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const LoginTela(title: "Login"));
+    await tester.pumpWidget(const LoginTela());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

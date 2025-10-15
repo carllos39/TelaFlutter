@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:telas_application_1/page/cadastro_tela.dart';
+
 
 class LoginTela extends StatefulWidget {
-  const LoginTela({super.key, required String title});
+  const LoginTela({super.key});
 
   @override
   State<LoginTela> createState() => _LoginTelaState();
@@ -47,20 +49,36 @@ class _LoginTelaState extends State<LoginTela> {
                       print(controllerSenha.text);
                       if (controllerLogin.text == "admin" &&
                           controllerSenha.text == "123456") {
-                        
-                          }else{
-                           showDialog(context: context, 
-                           builder: (context){
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
                             return AlertDialog(
                               title: Text("Usuário ou senha errada!"),
                             );
-                           },
-                           );
-                   
-                          }
+                          },
+                        );
+                      }
                     },
                     child: Text('logar'),
                   ),
+                ),
+                Row(
+                  children: [
+                    
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                           MaterialPageRoute(
+                            builder: (context)=> const CadastroTela(),
+                           ),
+                           );
+                      },
+                      child: Text("Cadastra-se"),
+                    ),
+                    
+                  ],
                 ),
               ],
             ),
