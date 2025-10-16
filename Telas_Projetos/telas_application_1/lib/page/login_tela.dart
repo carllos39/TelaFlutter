@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:telas_application_1/page/cadastro_paciente.dart';
 import 'package:telas_application_1/page/cadastro_tela.dart';
-
 
 class LoginTela extends StatefulWidget {
   const LoginTela({super.key});
@@ -49,6 +49,12 @@ class _LoginTelaState extends State<LoginTela> {
                       print(controllerSenha.text);
                       if (controllerLogin.text == "admin" &&
                           controllerSenha.text == "123456") {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CadastroPaciente(),
+                          ),
+                        );
                       } else {
                         showDialog(
                           context: context,
@@ -65,19 +71,17 @@ class _LoginTelaState extends State<LoginTela> {
                 ),
                 Row(
                   children: [
-                    
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                           MaterialPageRoute(
-                            builder: (context)=> const CadastroTela(),
-                           ),
-                           );
+                          MaterialPageRoute(
+                            builder: (context) => const CadastroTela(),
+                          ),
+                        );
                       },
                       child: Text("Cadastra-se"),
                     ),
-                    
                   ],
                 ),
               ],

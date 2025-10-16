@@ -76,11 +76,13 @@ class _CadastroTelaState extends State<CadastroTela> {
                       print(controllerSenha.text);
                       print(controllerConfirma.text);
 
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: const ),
-                      //     ),
+                       Navigator.push(
+                         context,
+                         MaterialPageRoute(
+                           builder: (context)=>const CadastroTela()),
+                       );
+                  
+                  
                     },
                     child: Text('Cadastrar'),
                   ),
