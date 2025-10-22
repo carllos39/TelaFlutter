@@ -22,8 +22,8 @@ class FirebaseService {
     try {
       final query = await _firestore.collection(collectionName).get();
       return query.docs.map((doc) => {"id": doc.id, ...doc.data()}).toList();
-    } catch (e) {
-      throw Exception("Erro ao buscar documentos:");
+    } catch (erro) {
+      throw Exception("Erro ao buscar documentos:$erro");
     }
   }
   Future<Map<String, dynamic>?> readById(String id) async {
