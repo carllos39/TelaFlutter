@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:via_cep/Models/usuario_model.dart';
+import 'package:via_cep/Services/firebase_service.dart';
 
 class FormCadastroUsuarioPage extends StatefulWidget {
   const FormCadastroUsuarioPage({super.key});
@@ -17,6 +19,52 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
   TextEditingController confirmacaoController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final FirebaseService _firebaseService = FirebaseService(
+    collectionName: "usuarios",
+  );
+
+  Future<void> salvarUsuario() async {
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
+
+    Usuario usuario = Usuario(
+      id: "",
+      nome: nomeController.text,
+      email: emailController.text,
+      telefone: telefoneController.text,
+      cpf: cpfController.text,
+      senha: senhaController.text,
+    );
+
+    try {
+      String idUser = await _firebaseService.create(usuario.toMap());
+
+      if (idUser.isNotEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.green,
+            content: Column(
+              children: [
+                Text(
+                  "Sucesso: $idUser",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "Usuário cadastrado com sucesso!",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    } catch (e) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +95,11 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
                     ),
                     TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return "O campo email é obrigatório";
-                        }
-
-                        if (!value.contains("@")) {
-                          return "Email invalido";
+                        final RegExp emailRegex = RegExp(
+                          r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                        );
+                        if (!emailRegex.hasMatch(value!)) {
+                          return "Email inválido";
                         }
 
                         return null;
@@ -64,15 +111,10 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
                       ),
                     ),
                     TextFormField(
-                            validator: (value) {
+                      validator: (value) {
                         if (value!.isEmpty) {
-                          return "O campo email é obrigatório";
+                          return "O campo telefone é obrigatório";
                         }
-
-                        if (!value.contains("@")) {
-                          return "Email invalido";
-                        }
-
                         return null;
                       },
                       controller: telefoneController,
@@ -82,15 +124,10 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
                       ),
                     ),
                     TextFormField(
-                            validator: (value) {
+                      validator: (value) {
                         if (value!.isEmpty) {
-                          return "O campo email é obrigatório";
+                          return "O campo cpf é obrigatório";
                         }
-
-                        if (!value.contains("@")) {
-                          return "Email invalido";
-                        }
-
                         return null;
                       },
                       controller: cpfController,
@@ -100,6 +137,12 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
                       ),
                     ),
                     TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "O campo senha é obrigatório";
+                        }
+                        return null;
+                      },
                       controller: senhaController,
                       decoration: InputDecoration(
                         labelText: "Senha",
@@ -107,8 +150,8 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
                       ),
                     ),
                     TextFormField(
-                               validator: (value) {
-                             if (value!.isEmpty) {
+                      validator: (value) {
+                        if (value!.isEmpty) {
                           return "A confirmação da senha deve ser digitada";
                         }
                         if (value != senhaController.text) {
@@ -123,13 +166,7 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        if (!formKey.currentState!.validate()) {
-                          return;
-                        }
-                        print("Formulário validado");
-
-                      },
+                      onPressed: salvarUsuario,
                       child: Text("Cadastrar"),
                     ),
                   ],
