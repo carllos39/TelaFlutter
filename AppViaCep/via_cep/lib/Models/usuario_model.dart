@@ -21,13 +21,13 @@ class Usuario {
       "email": email,
       "telefone": telefone,
       "senha": senha,
-      "cef": cpf,
+      "cpf": cpf,
     };
   }
 
-  factory Usuario.fromMap(Map<String,dynamic> map,String idUser){
+  factory Usuario.fromMap(Map<String, dynamic> map, String idUser) {
     return Usuario(
-        id: idUser,
+      id: idUser,
       nome: map["nome"],
       email: map["email"],
       telefone: map["telefone"],

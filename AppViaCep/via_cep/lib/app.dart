@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:via_cep/Pages/form_cadastro_user_page.dart';
+import 'package:via_cep/Pages/lista_user_page.dart';
 
 class ViaCepApi extends StatelessWidget {
   const ViaCepApi({super.key});
@@ -12,7 +13,7 @@ class ViaCepApi extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const FormCadastroUsuarioPage(),
+      home: const ListaUserPage(),
     );
   }
 }

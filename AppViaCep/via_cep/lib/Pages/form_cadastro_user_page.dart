@@ -148,6 +148,7 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
                         labelText: "Senha",
                         border: OutlineInputBorder(),
                       ),
+                      obscureText: true,
                     ),
                     TextFormField(
                       validator: (value) {
@@ -164,6 +165,7 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
                         labelText: "Confirme a senha",
                         border: OutlineInputBorder(),
                       ),
+                      obscureText: true,
                     ),
                     ElevatedButton(
                       onPressed: salvarUsuario,
