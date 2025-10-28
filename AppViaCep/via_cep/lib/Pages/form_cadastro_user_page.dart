@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:via_cep/Models/usuario_model.dart';
 import 'package:via_cep/Services/firebase_service.dart';
 
+
 class FormCadastroUsuarioPage extends StatefulWidget {
   const FormCadastroUsuarioPage({super.key});
 
@@ -148,7 +149,6 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
                         labelText: "Senha",
                         border: OutlineInputBorder(),
                       ),
-                      obscureText: true,
                     ),
                     TextFormField(
                       validator: (value) {
@@ -165,7 +165,6 @@ class _FormCadastroUsuarioPageState extends State<FormCadastroUsuarioPage> {
                         labelText: "Confirme a senha",
                         border: OutlineInputBorder(),
                       ),
-                      obscureText: true,
                     ),
                     ElevatedButton(
                       onPressed: salvarUsuario,
