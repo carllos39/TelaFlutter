@@ -4,7 +4,7 @@ import 'package:via_cep/Models/endereco.dart';
 import 'package:via_cep/Services/via_cep_service.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required String title});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
